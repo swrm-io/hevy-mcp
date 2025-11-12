@@ -6,7 +6,7 @@ before:
 
 builds:
   - id: hevy-mcp
-    main: ./main.go
+    main: ./
     binary: hevy-mcp
     env:
       - CGO_ENABLED=0
@@ -22,11 +22,11 @@ builds:
 
 archives:
   - id: hevy-mcp
-    format: tar.gz
+    formats: [ 'tar.gz' ]
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format_overrides:
       - goos: windows
-        format: zip
+        formats: [ 'zip' ]
     files:
       - README.md
       - LICENSE*
