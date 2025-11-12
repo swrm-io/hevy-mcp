@@ -11,5 +11,6 @@ type NoArgs struct{}
 
 // Fetch represents the input parameters for fetching workouts.
 type Fetch struct {
-	Count int `json:"count" jsonschema:"Number of items to fetch"`
+	Page int `json:"page" jsonschema:"Page number to fetch (default: 1)"`
+	Size int `json:"size" jsonschema:"Number of workouts per page (default: 5, max: 10)"`
 }
