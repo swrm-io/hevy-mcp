@@ -52,6 +52,24 @@ func main() {
 	mcp.AddTool(
 		server,
 		&mcp.Tool{
+			Name:        "get_workout",
+			Description: "Get a single workout by ID",
+		},
+		svc.getWorkout,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
+			Name:        "get_workout_events",
+			Description: "Get workout update and delete events",
+		},
+		svc.getWorkoutEvents,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
 			Name:        "get_routines",
 			Description: "Get workout routines (templates) from the user's account",
 		},
@@ -119,6 +137,24 @@ func main() {
 			Description: "Get basic info about the authenticated Hevy user",
 		},
 		svc.getUserInfo,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
+			Name:        "get_routine_folders",
+			Description: "Get routine folders",
+		},
+		svc.getRoutineFolders,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
+			Name:        "get_routine_folder",
+			Description: "Get a single routine folder by ID",
+		},
+		svc.getRoutineFolder,
 	)
 
 	// Start server with stdio transport
