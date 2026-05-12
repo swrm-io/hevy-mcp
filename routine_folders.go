@@ -12,6 +12,10 @@ type RoutineFolderID struct {
 	ID int `json:"id" jsonschema:"The routine folder ID"`
 }
 
+type CreateRoutineFolderArgs struct {
+	Title string `json:"title" jsonschema:"The title of the new routine folder"`
+}
+
 func (s svc) getRoutineFolders(ctx context.Context, req *mcp.CallToolRequest, args Fetch) (*mcp.CallToolResult, any, error) {
 	page := args.Page
 	if page <= 0 {
@@ -45,6 +49,24 @@ func (s svc) getRoutineFolders(ctx context.Context, req *mcp.CallToolRequest, ar
 			&mcp.TextContent{
 				Text: fmt.Sprintf("Fetched %d routine folders (page: %d, size: %d, more pages: %s):\n\n%s", len(result.RoutineFolders), page, size, hasMore, string(data)),
 			},
+		},
+	}, nil, nil
+}
+
+func (s svc) createRoutineFolder(ctx context.Context, req *mcp.CallToolRequest, args CreateRoutineFolderArgs) (*mcp.CallToolResult, any, error) {
+	folder, err := s.client.RoutineFolders.Create(ctx, args.Title)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to create routine folder: %v", err)
+	}
+
+	data, err := json.MarshalIndent(folder, "", "  ")
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to marshal routine folder: %v", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{Text: string(data)},
 		},
 	}, nil, nil
 }

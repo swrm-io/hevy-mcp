@@ -54,6 +54,19 @@ func (s svc) getExerciseTemplates(ctx context.Context, req *mcp.CallToolRequest,
 	}, nil, nil
 }
 
+func (s svc) createExerciseTemplate(ctx context.Context, req *mcp.CallToolRequest, args CreateExerciseInput) (*mcp.CallToolResult, any, error) {
+	id, err := s.client.ExerciseTemplates.Create(ctx, args.toLibType())
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to create exercise template: %v", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{Text: fmt.Sprintf("Created exercise template with ID: %d", id)},
+		},
+	}, nil, nil
+}
+
 func (s svc) getExerciseTemplate(ctx context.Context, req *mcp.CallToolRequest, args ExerciseTemplateID) (*mcp.CallToolResult, any, error) {
 	template, err := s.client.ExerciseTemplates.Get(ctx, args.ID)
 	if err != nil {

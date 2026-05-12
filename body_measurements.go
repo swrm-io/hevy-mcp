@@ -49,6 +49,30 @@ func (s svc) getBodyMeasurements(ctx context.Context, req *mcp.CallToolRequest, 
 	}, nil, nil
 }
 
+func (s svc) createBodyMeasurement(ctx context.Context, req *mcp.CallToolRequest, args BodyMeasurementInput) (*mcp.CallToolResult, any, error) {
+	if err := s.client.BodyMeasurements.Create(ctx, args.toLibType()); err != nil {
+		return nil, nil, fmt.Errorf("failed to create body measurement: %v", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{Text: fmt.Sprintf("Created body measurement for %s", args.Date)},
+		},
+	}, nil, nil
+}
+
+func (s svc) updateBodyMeasurement(ctx context.Context, req *mcp.CallToolRequest, args BodyMeasurementUpdateInput) (*mcp.CallToolResult, any, error) {
+	if err := s.client.BodyMeasurements.Update(ctx, args.Date, args.toUpdateLibType()); err != nil {
+		return nil, nil, fmt.Errorf("failed to update body measurement: %v", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{Text: fmt.Sprintf("Updated body measurement for %s", args.Date)},
+		},
+	}, nil, nil
+}
+
 func (s svc) getBodyMeasurement(ctx context.Context, req *mcp.CallToolRequest, args MeasurementDate) (*mcp.CallToolResult, any, error) {
 	measurement, err := s.client.BodyMeasurements.Get(ctx, args.Date)
 	if err != nil {

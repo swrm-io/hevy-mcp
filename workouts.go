@@ -28,12 +28,10 @@ func (s svc) getWorkoutCount(ctx context.Context, req *mcp.CallToolRequest, args
 }
 
 func (s svc) getWorkouts(ctx context.Context, req *mcp.CallToolRequest, args Fetch) (*mcp.CallToolResult, any, error) {
-	// Set defaults and limits
 	page := args.Page
 	if page <= 0 {
 		page = 1
 	}
-
 	size := args.Size
 	if size <= 0 {
 		size = 5
@@ -70,6 +68,42 @@ func (s svc) getWorkout(ctx context.Context, req *mcp.CallToolRequest, args Work
 	workout, err := s.client.Workouts.Get(ctx, args.ID)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to fetch workout: %v", err)
+	}
+
+	data, err := json.MarshalIndent(workout, "", "  ")
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to marshal workout: %v", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{Text: string(data)},
+		},
+	}, nil, nil
+}
+
+func (s svc) createWorkout(ctx context.Context, req *mcp.CallToolRequest, args WorkoutInput) (*mcp.CallToolResult, any, error) {
+	workout, err := s.client.Workouts.Create(ctx, args.toLibType())
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to create workout: %v", err)
+	}
+
+	data, err := json.MarshalIndent(workout, "", "  ")
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to marshal workout: %v", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{Text: string(data)},
+		},
+	}, nil, nil
+}
+
+func (s svc) updateWorkout(ctx context.Context, req *mcp.CallToolRequest, args UpdateWorkoutInput) (*mcp.CallToolResult, any, error) {
+	workout, err := s.client.Workouts.Update(ctx, args.ID, args.Workout.toLibType())
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to update workout: %v", err)
 	}
 
 	data, err := json.MarshalIndent(workout, "", "  ")

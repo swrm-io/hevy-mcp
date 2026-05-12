@@ -49,6 +49,42 @@ func (s svc) getRoutines(ctx context.Context, req *mcp.CallToolRequest, args Fet
 	}, nil, nil
 }
 
+func (s svc) createRoutine(ctx context.Context, req *mcp.CallToolRequest, args RoutineInput) (*mcp.CallToolResult, any, error) {
+	routine, err := s.client.Routines.Create(ctx, args.toLibType())
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to create routine: %v", err)
+	}
+
+	data, err := json.MarshalIndent(routine, "", "  ")
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to marshal routine: %v", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{Text: string(data)},
+		},
+	}, nil, nil
+}
+
+func (s svc) updateRoutine(ctx context.Context, req *mcp.CallToolRequest, args UpdateRoutineInput) (*mcp.CallToolResult, any, error) {
+	routine, err := s.client.Routines.Update(ctx, args.ID, args.Routine.toLibType())
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to update routine: %v", err)
+	}
+
+	data, err := json.MarshalIndent(routine, "", "  ")
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to marshal routine: %v", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{Text: string(data)},
+		},
+	}, nil, nil
+}
+
 func (s svc) getRoutine(ctx context.Context, req *mcp.CallToolRequest, args RoutineID) (*mcp.CallToolResult, any, error) {
 	routine, err := s.client.Routines.Get(ctx, args.ID)
 	if err != nil {
