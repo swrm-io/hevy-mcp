@@ -19,7 +19,7 @@ func main() {
 
 	slog.Info("Starting Hevy MCP Server")
 
-	client := hevy.NewClient(apiKey)
+	client := hevy.New(apiKey)
 	svc := svc{
 		client: client,
 	}
@@ -47,6 +47,78 @@ func main() {
 			Description: "Get Workouts from newest to oldest",
 		},
 		svc.getWorkouts,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
+			Name:        "get_routines",
+			Description: "Get workout routines (templates) from the user's account",
+		},
+		svc.getRoutines,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
+			Name:        "get_routine",
+			Description: "Get a single workout routine by ID",
+		},
+		svc.getRoutine,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
+			Name:        "get_exercise_templates",
+			Description: "Get exercise templates (exercise library)",
+		},
+		svc.getExerciseTemplates,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
+			Name:        "get_exercise_template",
+			Description: "Get a single exercise template by ID",
+		},
+		svc.getExerciseTemplate,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
+			Name:        "get_exercise_history",
+			Description: "Get the full set history for a given exercise template",
+		},
+		svc.getExerciseHistory,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
+			Name:        "get_body_measurements",
+			Description: "Get body measurements from newest to oldest",
+		},
+		svc.getBodyMeasurements,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
+			Name:        "get_body_measurement",
+			Description: "Get body measurements for a specific date (YYYY-MM-DD)",
+		},
+		svc.getBodyMeasurement,
+	)
+
+	mcp.AddTool(
+		server,
+		&mcp.Tool{
+			Name:        "get_user_info",
+			Description: "Get basic info about the authenticated Hevy user",
+		},
+		svc.getUserInfo,
 	)
 
 	// Start server with stdio transport

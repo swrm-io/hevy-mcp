@@ -9,7 +9,7 @@ import (
 )
 
 func (s svc) getWorkoutCount(ctx context.Context, req *mcp.CallToolRequest, args NoArgs) (*mcp.CallToolResult, any, error) {
-	count, err := s.client.WorkoutCount()
+	count, err := s.client.Workouts.Count(ctx)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to fetch workout count: %v", err)
 	}
@@ -38,25 +38,25 @@ func (s svc) getWorkouts(ctx context.Context, req *mcp.CallToolRequest, args Fet
 		size = 10
 	}
 
-	workouts, nextPage, err := s.client.GetWorkouts(page, size)
+	result, err := s.client.Workouts.List(ctx, page, size)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to fetch workouts: %v", err)
 	}
 
-	data, err := json.MarshalIndent(workouts, "", "  ")
+	data, err := json.MarshalIndent(result.Workouts, "", "  ")
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to marshal workouts: %v", err)
 	}
 
 	hasMore := "no"
-	if nextPage > 0 {
-		hasMore = fmt.Sprintf("yes (next page: %d)", nextPage)
+	if page < result.PageCount {
+		hasMore = fmt.Sprintf("yes (next page: %d)", page+1)
 	}
 
 	return &mcp.CallToolResult{
 		Content: []mcp.Content{
 			&mcp.TextContent{
-				Text: fmt.Sprintf("Fetched %d workouts (page: %d, size: %d, more pages: %s):\n\n%s", len(workouts), page, size, hasMore, string(data)),
+				Text: fmt.Sprintf("Fetched %d workouts (page: %d, size: %d, more pages: %s):\n\n%s", len(result.Workouts), page, size, hasMore, string(data)),
 			},
 		},
 	}, nil, nil

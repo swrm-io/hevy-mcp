@@ -14,6 +14,8 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/swrm-io/go-hevy v0.0.0-20251112053205-ed4e7f88c12a h1:R9hQQqn6nYlXOwCUK/neZFYEK/PbOB+IkyFxqCMt95E=
 github.com/swrm-io/go-hevy v0.0.0-20251112053205-ed4e7f88c12a/go.mod h1:IIZlUz9/QHQx7bg4l2u27xd9ZNtabrmudtPuu3qxFuE=
+github.com/swrm-io/go-hevy v0.0.0-20260512075328-308d2994503e h1:L8hkds0+MARJrregbu4NBDDFXvWkmlsVinW0ICIvMeI=
+github.com/swrm-io/go-hevy v0.0.0-20260512075328-308d2994503e/go.mod h1:yKcvTr3yf57BcVkmSOgO/tGacZBv83uPh9u5bpjoIes=
 github.com/yosida95/uritemplate/v3 v3.0.2 h1:Ed3Oyj9yrmi9087+NczuL5BwkIc4wvTb5zIM+UJPGz4=
 github.com/yosida95/uritemplate/v3 v3.0.2/go.mod h1:ILOh0sOhIJR3+L/8afwt/kE++YT040gmv5BQTMR2HP4=
 golang.org/x/oauth2 v0.30.0 h1:dnDm7JmhM45NNpd8FDDeLhK6FwqbOf4MLCM9zb1BOHI=
