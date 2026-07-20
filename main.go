@@ -116,7 +116,7 @@ func main() {
 		server,
 		&mcp.Tool{
 			Name:        "update_routine",
-			Description: "Replace all fields of an existing routine. Requires the full routine payload, not just changed fields. Routine IDs are returned by get_routines.",
+			Description: "Replace all fields of an existing routine. Requires the full routine payload, not just changed fields. Routine IDs are returned by get_routines. Note: the routine's folder cannot be changed via update (the Hevy API rejects folder_id on this endpoint) — a routine can only be assigned to a folder at creation time via create_routine.",
 		},
 		svc.updateRoutine,
 	)

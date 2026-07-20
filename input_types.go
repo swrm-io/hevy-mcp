@@ -157,7 +157,6 @@ func (r RoutineInput) toLibType() hevy.RoutineInput {
 
 type RoutineUpdateInput struct {
 	Title     string                 `json:"title" jsonschema:"Routine title"`
-	FolderID  *float64               `json:"folder_id,omitempty" jsonschema:"Optional routine folder ID"`
 	Notes     *string                `json:"notes,omitempty" jsonschema:"Optional notes for the routine"`
 	Exercises []RoutineExerciseInput `json:"exercises" jsonschema:"List of exercises in the routine"`
 }
@@ -169,7 +168,6 @@ func (r RoutineUpdateInput) toLibType() hevy.RoutineUpdateInput {
 	}
 	return hevy.RoutineUpdateInput{
 		Title:     r.Title,
-		FolderID:  r.FolderID,
 		Notes:     r.Notes,
 		Exercises: exercises,
 	}

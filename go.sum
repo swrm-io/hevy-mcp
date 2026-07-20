@@ -18,6 +18,8 @@ github.com/swrm-io/go-hevy v0.0.0-20260512075328-308d2994503e h1:L8hkds0+MARJrre
 github.com/swrm-io/go-hevy v0.0.0-20260512075328-308d2994503e/go.mod h1:yKcvTr3yf57BcVkmSOgO/tGacZBv83uPh9u5bpjoIes=
 github.com/swrm-io/go-hevy v0.0.0-20260720101426-5265d6b1a045 h1:YQtr853yTDANqKR9JuQBgSLzCLmRskHDX/34+yPfPpQ=
 github.com/swrm-io/go-hevy v0.0.0-20260720101426-5265d6b1a045/go.mod h1:yKcvTr3yf57BcVkmSOgO/tGacZBv83uPh9u5bpjoIes=
+github.com/swrm-io/go-hevy v0.0.0-20260720102829-66d6113fb0f1 h1:ktL3OdJM/99MDh0BxDfUIhoOsB4e+qfT88pxkyq0Vgk=
+github.com/swrm-io/go-hevy v0.0.0-20260720102829-66d6113fb0f1/go.mod h1:yKcvTr3yf57BcVkmSOgO/tGacZBv83uPh9u5bpjoIes=
 github.com/yosida95/uritemplate/v3 v3.0.2 h1:Ed3Oyj9yrmi9087+NczuL5BwkIc4wvTb5zIM+UJPGz4=
 github.com/yosida95/uritemplate/v3 v3.0.2/go.mod h1:ILOh0sOhIJR3+L/8afwt/kE++YT040gmv5BQTMR2HP4=
 golang.org/x/oauth2 v0.30.0 h1:dnDm7JmhM45NNpd8FDDeLhK6FwqbOf4MLCM9zb1BOHI=
