@@ -4,7 +4,7 @@ go 1.25.1
 
 require (
 	github.com/modelcontextprotocol/go-sdk v1.1.0
-	github.com/swrm-io/go-hevy v0.0.0-20260512075328-308d2994503e
+	github.com/swrm-io/go-hevy v0.0.0-20260720101426-5265d6b1a045
 )
 
 require (
